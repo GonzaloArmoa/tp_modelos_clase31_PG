@@ -7,16 +7,16 @@ module.exports = {
                 ['last_name', 'ASC']
             ]
         })
-        .catch(error => console.log(error))
+        .then((actors) =>{
+            return res.render('actorsList', {
+                actors
+             })
+        })
+        .catch((error) => console.log(error))  
     },
 
- /*    detail : (req,res) => {
-        db.Actor.findByPk(req.params.id)
-        .then(actor => res.render('actorsDetail',{
-        actor}))
-        .catch(error => console.log(error))     */
 
-        detail : (req,res) => {
+     detail : (req,res) => {
             db.Actor.findByPk(req.params.id)
             .then(actor => 
                 db.Movie.findByPk(actor.favorite_movie_id)
